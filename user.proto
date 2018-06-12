@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+import "base.proto";
+
+package user;
+
+service UserManagement {
+  rpc CreateUser(CreateUserReq) returns (User);
+  rpc GetUser(base.IdReq) returns (User);
+  rpc UpdateUser(UpdateUserReq) returns (User);
+  rpc DeleteUser(base.IdReq) returns (base.DefaultRes);
+}
+
+message Resource {
+  enum Gender {
+    MALE = 0;
+    FAMALE = 1;
+  }
+}
+
+message User {
+  uint64 id = 1;
+  string nickname = 2;
+  string birthday = 3;
+  Resource.Gender gender = 4;
+  string phonenumber = 5;
+  string introduction = 6;
+  repeated uint64 pet_ids = 7;
+}
+
+message CreateUserReq {
+  string nickname = 1;
+  string birthday = 2;
+  Resource.Gender gender = 3;
+  string phonenumber = 4;
+}
+
+message UpdateUserReq {
+  uint64 id = 1;
+  string nickname = 2;
+  string birthday = 3;
+  Resource.Gender gender = 4;
+  string introduction = 6;
+  repeated uint64 pet_ids = 7;
+}
